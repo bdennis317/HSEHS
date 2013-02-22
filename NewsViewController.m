@@ -10,6 +10,7 @@
 #import "MenuViewController.h"
 #import "ECSlidingViewController.h"
 #import "MWFeedParser.h"
+#import "UIDevice+Resolutions.h"
 #import "NewsStoryScrollView.h"
 
 @interface NewsViewController ()
@@ -60,6 +61,8 @@
     [super viewDidLoad];
     [self setUpMenuAndNav];
      [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"whitepattern@2x.png"]]];
+    
+    parsedItems = [[NSMutableArray alloc] initWithCapacity:5000];
     
     // Parse
 	NSURL *feedURL = [NSURL URLWithString:@"http://www.hseorb.com/feed/"];
@@ -121,19 +124,35 @@
 -(void)updateViewWithParsedItems {
     
     if (!scrollView) {
-        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 20, 320, 800)];
         
-        scrollView.contentSize = CGSizeMake(300 *[parsedItems count], 489);
+        int valueDevice = [UIDevice currentResolution];
+        
+        NSLog(@"valueDevice: %d ...", valueDevice);
+        
+ 
+        if (valueDevice == 3) {
+            //is an iPhone 5
+            scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 57, 299, 400)];
+
+        } else {
+            // is before iPhone 5
+            scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 57, 299, 300)];
+            
+        }
+
+    
+        scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width *[parsedItems count], scrollView.bounds.size.height);
+        scrollView.pagingEnabled = YES;
+        NSLog(@"%d",[parsedItems count]);
         
         for (int x = 0; x < [parsedItems count]; x++) {            
             MWFeedItem *parsedStory = [parsedItems objectAtIndex:x];
-            NSLog(@"The first enclosed thing: %@", [parsedStory.enclosures objectAtIndex:0]);
+            NSLog(@"The first enclosed thing: %@" ,[parsedStory.enclosures objectAtIndex:0]);
+            NSLog(@"The parsed story title: %@" ,parsedStory.title);
             
-            NewsStoryScrollView *storyView = [[NewsStoryScrollView alloc] initWithFrame:CGRectMake(0, 0, 300, 489)];
-            storyView.title = parsedStory.title;
-            storyView.body = parsedStory.content;
-          //  storyView.image = parsedStory.image;
-            storyView.date = parsedStory.date;
+            NewsStoryScrollView* storyView = [[NewsStoryScrollView alloc] initWithFrame:CGRectMake(x * scrollView.bounds.size.width, 0, scrollView.bounds.size.width, scrollView.bounds.size.height) title:parsedStory.title    date:parsedStory.date imageURL:nil body:parsedStory.content];
+            storyView.contentSize = CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height);
+          
             [scrollView addSubview:storyView];
         }
         

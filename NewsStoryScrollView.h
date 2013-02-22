@@ -16,4 +16,5 @@
 @property (nonatomic, retain) NSDate *date;
 
 
+- (id)initWithFrame:(CGRect)frame title:(NSString *)_title date:(NSDate *)_date imageURL:(NSString *)_imageURL body:(NSString *)_body;
 @end

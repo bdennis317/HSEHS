@@ -87,7 +87,6 @@
 		7FFBFBB716D1584200B449C2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FFBFBB616D1584200B449C2 /* AVFoundation.framework */; };
 		7FFBFBB916D1617F00B449C2 /* btn-large-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBFBB816D1617F00B449C2 /* btn-large-3@2x.png */; };
 		7FFBFBBB16D1692200B449C2 /* menuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBFBBA16D1692200B449C2 /* menuButton@2x.png */; };
-		7FFBFBC016D1FFBC00B449C2 /* Papers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBFBBF16D1FFBC00B449C2 /* Papers@2x.png */; };
 		7FFBFBC316D2008500B449C2 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBC216D2008500B449C2 /* NewsViewController.m */; };
 		7FFBFBD616D202DD00B449C2 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBC616D202DD00B449C2 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7FFBFBD716D202DD00B449C2 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBC816D202DD00B449C2 /* MWFeedInfo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -97,6 +96,8 @@
 		7FFBFBDC16D202DD00B449C2 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBD316D202DD00B449C2 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7FFBFBDD16D202DD00B449C2 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBD516D202DD00B449C2 /* NSString+XMLEntities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7FFBFBE016D20CE400B449C2 /* NewsStoryScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBDF16D20CE300B449C2 /* NewsStoryScrollView.m */; };
+		7FFBFBE616D28DCE00B449C2 /* UIDevice+Resolutions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBFBE516D28DCE00B449C2 /* UIDevice+Resolutions.m */; };
+		7FFBFBE916D2A14700B449C2 /* Papers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBFBE816D2A14700B449C2 /* Papers@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -216,7 +217,6 @@
 		7FFBFBB616D1584200B449C2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7FFBFBB816D1617F00B449C2 /* btn-large-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-large-3@2x.png"; sourceTree = "<group>"; };
 		7FFBFBBA16D1692200B449C2 /* menuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menuButton@2x.png"; sourceTree = "<group>"; };
-		7FFBFBBF16D1FFBC00B449C2 /* Papers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Papers@2x.png"; sourceTree = "<group>"; };
 		7FFBFBC116D2008400B449C2 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsViewController.h; path = ../NewsViewController.h; sourceTree = "<group>"; };
 		7FFBFBC216D2008500B449C2 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsViewController.m; path = ../NewsViewController.m; sourceTree = "<group>"; };
 		7FFBFBC516D202DD00B449C2 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
@@ -236,6 +236,9 @@
 		7FFBFBD516D202DD00B449C2 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		7FFBFBDE16D20CE300B449C2 /* NewsStoryScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsStoryScrollView.h; path = ../NewsStoryScrollView.h; sourceTree = "<group>"; };
 		7FFBFBDF16D20CE300B449C2 /* NewsStoryScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsStoryScrollView.m; path = ../NewsStoryScrollView.m; sourceTree = "<group>"; };
+		7FFBFBE416D28DCD00B449C2 /* UIDevice+Resolutions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Resolutions.h"; sourceTree = "<group>"; };
+		7FFBFBE516D28DCE00B449C2 /* UIDevice+Resolutions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Resolutions.m"; sourceTree = "<group>"; };
+		7FFBFBE816D2A14700B449C2 /* Papers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Papers@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,6 +363,8 @@
 		7F8E1A9E16BC4AD700B7B3CB = {
 			isa = PBXGroup;
 			children = (
+				7FFBFBE416D28DCD00B449C2 /* UIDevice+Resolutions.h */,
+				7FFBFBE516D28DCE00B449C2 /* UIDevice+Resolutions.m */,
 				7FFBFBC416D2026800B449C2 /* MWFeedParser */,
 				7FFBFBB616D1584200B449C2 /* AVFoundation.framework */,
 				7FD3980316C848050042B3DA /* AlertCellView.xib */,
@@ -446,7 +451,7 @@
 		7F8E1AB116BC4AD700B7B3CB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7FFBFBBF16D1FFBC00B449C2 /* Papers@2x.png */,
+				7FFBFBE816D2A14700B449C2 /* Papers@2x.png */,
 				7FFBFBB816D1617F00B449C2 /* btn-large-3@2x.png */,
 				7F22912516D0A18A00D5E884 /* PlayButton@2x.png */,
 				7FA53D1116C93C3000F7E0D8 /* White TableView */,
@@ -626,7 +631,7 @@
 				7F22912616D0A18A00D5E884 /* PlayButton@2x.png in Resources */,
 				7FFBFBB916D1617F00B449C2 /* btn-large-3@2x.png in Resources */,
 				7FFBFBBB16D1692200B449C2 /* menuButton@2x.png in Resources */,
-				7FFBFBC016D1FFBC00B449C2 /* Papers@2x.png in Resources */,
+				7FFBFBE916D2A14700B449C2 /* Papers@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +675,7 @@
 				7FFBFBDC16D202DD00B449C2 /* NSString+HTML.m in Sources */,
 				7FFBFBDD16D202DD00B449C2 /* NSString+XMLEntities.m in Sources */,
 				7FFBFBE016D20CE400B449C2 /* NewsStoryScrollView.m in Sources */,
+				7FFBFBE616D28DCE00B449C2 /* UIDevice+Resolutions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

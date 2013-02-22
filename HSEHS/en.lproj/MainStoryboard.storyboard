@@ -156,13 +156,37 @@
                                     <navigationItem title="Text A Tip" id="ljt-3Z-YOj"/>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="0ug-Wk-cCR">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="0ug-Wk-cCR">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="301" id="6Mr-Xp-dar"/>
-                                    <constraint firstAttribute="height" constant="270" id="zfU-Eq-Db6"/>
+                                    <constraint firstAttribute="height" constant="119" id="XJW-Mq-hSI"/>
+                                    <constraint firstAttribute="width" constant="301" id="YUf-z9-RcM"/>
                                 </constraints>
-                                <string key="text">Text-A-Tip is a program that allows students, parents or others to anonymously send a text or email message to our school resource officers and school administrators about concerns they may have for their own safety or the safety of others. Text-A-Tip will be actively monitored during the school day. It should not be used for emergencies—Call 911 if you need immediate help.</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Text-A-Tip is a program that allows students, parents or others to anonymously send a text or email message to our school resource officers and school administrators about concerns they may have for their own safety or the safety of others. Text-A-Tip will be actively monitored during the school day.</string>
+                                        <attributes>
+                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="301" translatesAutoresizingMaskIntoConstraints="NO" id="dLD-OQ-OxH">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="FSH-xX-ljo"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="It should not be used for emergencies—Call 911 if you need immediate help.">
+                                        <attributes>
+                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-LightItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfc-Vb-XgS">
@@ -184,17 +208,24 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="yOX-Hk-Iyy" firstAttribute="trailing" secondItem="knE-HT-0Yr" secondAttribute="trailing" type="default" id="02l-DJ-ccw"/>
-                            <constraint firstAttribute="trailing" secondItem="rfc-Vb-XgS" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ikb-5n-aRc"/>
+                            <constraint firstItem="rfc-Vb-XgS" firstAttribute="top" relation="lessThanOrEqual" secondItem="dLD-OQ-OxH" secondAttribute="bottom" constant="15" type="user" id="6Sh-0u-Hgv"/>
+                            <constraint firstItem="dLD-OQ-OxH" firstAttribute="leading" secondItem="0ug-Wk-cCR" secondAttribute="leading" type="default" id="9Lx-An-8UQ"/>
+                            <constraint firstItem="rfc-Vb-XgS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="knE-HT-0Yr" secondAttribute="leading" constant="20" type="user" id="BXj-4b-KCX"/>
+                            <constraint firstItem="0ug-Wk-cCR" firstAttribute="top" secondItem="knE-HT-0Yr" secondAttribute="top" constant="56" id="CqT-RY-yLH"/>
                             <constraint firstItem="c86-0X-qEB" firstAttribute="top" secondItem="knE-HT-0Yr" secondAttribute="top" type="default" id="P9i-zl-1QB"/>
-                            <constraint firstItem="rfc-Vb-XgS" firstAttribute="leading" secondItem="knE-HT-0Yr" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="S2D-OP-AZh"/>
+                            <constraint firstItem="rfc-Vb-XgS" firstAttribute="leading" secondItem="knE-HT-0Yr" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="S2D-OP-AZh"/>
                             <constraint firstItem="c86-0X-qEB" firstAttribute="leading" secondItem="knE-HT-0Yr" secondAttribute="leading" type="default" id="VBT-yC-QU1"/>
-                            <constraint firstItem="rfc-Vb-XgS" firstAttribute="top" secondItem="0ug-Wk-cCR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="XO2-up-npF"/>
-                            <constraint firstItem="0ug-Wk-cCR" firstAttribute="top" secondItem="c86-0X-qEB" secondAttribute="bottom" type="default" id="a3M-0x-0Rz"/>
-                            <constraint firstItem="0ug-Wk-cCR" firstAttribute="leading" secondItem="knE-HT-0Yr" secondAttribute="leading" constant="9" id="bwY-Sw-VD0"/>
-                            <constraint firstItem="c86-0X-qEB" firstAttribute="trailing" secondItem="knE-HT-0Yr" secondAttribute="trailing" type="default" id="eUG-lC-fc3"/>
+                            <constraint firstItem="yOX-Hk-Iyy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rfc-Vb-XgS" secondAttribute="bottom" constant="20" type="user" id="eg1-ib-EbY"/>
                             <constraint firstItem="yOX-Hk-Iyy" firstAttribute="leading" secondItem="knE-HT-0Yr" secondAttribute="leading" type="default" id="mmi-x8-IUE"/>
-                            <constraint firstItem="yOX-Hk-Iyy" firstAttribute="top" secondItem="rfc-Vb-XgS" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="nBz-UF-nBc"/>
+                            <constraint firstItem="dLD-OQ-OxH" firstAttribute="trailing" secondItem="0ug-Wk-cCR" secondAttribute="trailing" type="default" id="nMb-H5-UnH"/>
+                            <constraint firstAttribute="bottom" secondItem="yOX-Hk-Iyy" secondAttribute="bottom" constant="30" id="psV-nG-Thk"/>
+                            <constraint firstItem="c86-0X-qEB" firstAttribute="trailing" secondItem="knE-HT-0Yr" secondAttribute="trailing" type="default" id="s5T-d9-e8v"/>
+                            <constraint firstItem="rfc-Vb-XgS" firstAttribute="top" secondItem="dLD-OQ-OxH" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="sM4-aB-luK"/>
+                            <constraint firstItem="yOX-Hk-Iyy" firstAttribute="trailing" secondItem="knE-HT-0Yr" secondAttribute="trailing" type="default" id="vvo-P4-IHI"/>
+                            <constraint firstItem="dLD-OQ-OxH" firstAttribute="top" secondItem="0ug-Wk-cCR" secondAttribute="bottom" constant="8" type="user" id="x5A-rQ-TSM"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yOX-Hk-Iyy" secondAttribute="bottom" constant="15" type="user" id="yJO-bp-n2k"/>
+                            <constraint firstAttribute="trailing" secondItem="rfc-Vb-XgS" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="zYa-yr-3fG"/>
+                            <constraint firstItem="dLD-OQ-OxH" firstAttribute="centerX" secondItem="rfc-Vb-XgS" secondAttribute="centerX" type="default" id="zuq-EZ-WI0"/>
                         </constraints>
                     </view>
                     <connections>
@@ -466,6 +497,93 @@
         <image name="Papers@2x.png" width="640" height="1058"/>
         <image name="btn-large-3@2x.png" width="600" height="92"/>
     </resources>
+    <classes>
+        <class className="BellSchedulesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BellSchedulesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="campusControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="typeControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="ContactTeacherViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContactTeacherViewController.h"/>
+        </class>
+        <class className="ContactUsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContactUsViewController.h"/>
+        </class>
+        <class className="ECSlidingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
+        </class>
+        <class className="HandbookViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HandbookViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="InitViewController" superclassName="ECSlidingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitViewController.h"/>
+        </class>
+        <class className="LunchViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LunchViewController.h"/>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="youtubeTest:"/>
+            </relationships>
+        </class>
+        <class className="MenuViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NewsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="menuBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+            </relationships>
+        </class>
+        <class className="SkylertsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SkylertsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="TextATipViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TextATipViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="action" name="textTapped:"/>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="textButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="VideoPlaylistViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VideoPlaylistViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="YoutubePlayerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/YoutubePlayerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
