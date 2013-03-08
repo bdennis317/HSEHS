@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 @interface VideoPlaylistViewController : UIViewController <UITableViewDataSource,UITableViewDelegate> {
     
-   IBOutlet UITableView *tableView;
+    IBOutlet UITableView *tableView;
+    MBProgressHUD *HUD;
 }
 
 

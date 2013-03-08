@@ -501,6 +501,7 @@
         <class className="BellSchedulesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BellSchedulesViewController.h"/>
             <relationships>
+                <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="campusControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
@@ -529,6 +530,9 @@
         <class className="LunchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LunchViewController.h"/>
         </class>
+        <class className="MBProgressHUD" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MBProgressHUD.h"/>
+        </class>
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
@@ -555,7 +559,7 @@
         <class className="SkylertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SkylertsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="outlet" name="hudView" candidateClass="MBProgressHUD"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

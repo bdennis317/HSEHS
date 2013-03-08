@@ -30,20 +30,48 @@
 
 -(void)loadSchedule {
     
-    if (!schedule)
-        schedule = [[NSMutableArray alloc] init];
+    if(!mainDictionary) {
+    NSString *pathToPlist = [NSString stringWithFormat:@"%@/bellSchedule.plist",[[NSBundle mainBundle]resourcePath]];
+    mainDictionary = [NSDictionary dictionaryWithContentsOfFile:pathToPlist];
+    }
+    
+    
+    NSDictionary * buildingDict = nil;
+    
+    if (!periodNames) 
+        periodNames = [[NSMutableArray alloc] init];
+    
+    if (!periodTimes)
+        periodTimes = [[NSMutableArray alloc] init];
         
-    if (campusControl.selectedSegmentIndex == 0) {
-        
+    if (campusControl.selectedSegmentIndex == 0)
+        buildingDict  = [mainDictionary valueForKey:@"Main Campus"];
+    else
+        buildingDict  = [mainDictionary valueForKey:@"Freshmen"];
+    
+    
+        NSDictionary *scheduleDic = nil;
         switch (typeControl.selectedSegmentIndex) {
             case 0:
-           //     schedule = [NSArray arrayWithObjects:]l
+                scheduleDic = [buildingDict valueForKey:@"Regular"];
                 break;
-                
+            case 1:
+                scheduleDic = [buildingDict valueForKey:@"Smart"];
+                break;
+            case 2:
+                scheduleDic = [buildingDict valueForKey:@"Late Start"];
+                break;
+            case 3:
+                scheduleDic = [buildingDict valueForKey:@"2Hour Delay"];
+                break;
             default:
                 break;
         }
-    }
+    
+    periodTimes = [scheduleDic valueForKey:@"times"];
+    periodNames = [scheduleDic valueForKey:@"names"];
+    
+    [tableView reloadData];
     
 }
 -(void) setUpMenuAndNav {
@@ -76,9 +104,12 @@
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.separatorColor = [UIColor blackColor];
-   // [self set]
     
-	// Do any additional setup after loading the view.
+    [campusControl addTarget:self action:@selector(loadSchedule) forControlEvents:UIControlEventValueChanged];
+    [typeControl addTarget:self action:@selector(loadSchedule) forControlEvents:UIControlEventValueChanged];
+    
+    [self loadSchedule];
+    
 }
 
 -(void)setScheduleForCampus:(NSString *)campus {
@@ -115,11 +146,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [periods count];
+    return [periodNames count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
@@ -129,21 +162,43 @@
 		cell.selectedBackgroundView =
         [[UIImageView alloc] init];
         cell.textLabel.textColor = [UIColor colorWithRed:206 green:217 blue:228 alpha:1];
-        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,5,300,30)];
-       
-        if (indexPath.row == 4) {
-            timeLabel.text = @"(a: 11:30-12:01) (b: 11:30-12:01) (c: 11:30-12:01)";
-             timeLabel.font = [UIFont italicSystemFontOfSize:10];
-        }
-        else {
-            timeLabel.text = @"8:30 - 9:30";
-             timeLabel.font = [UIFont italicSystemFontOfSize:16];
-        }
-        timeLabel.textColor = [UIColor colorWithRed:206 green:217 blue:228 alpha:1];
-        timeLabel.backgroundColor = [UIColor clearColor];
-        timeLabel.textAlignment = NSTextAlignmentRight;
-        [cell addSubview:timeLabel];
     }
+    
+    for (UIView *v in cell.subviews) {
+        if (v.tag == 87)
+            [v removeFromSuperview];
+    }
+    
+    NSString *periodName = nil;
+    NSString *periodTime = nil;
+    //Grab data from arrays (make sure to call loadSchedule
+    if (periodNames.count > 0) {
+        periodName = [periodNames objectAtIndex:indexPath.row];
+    }
+    if (periodTimes.count > 0) {
+        periodTime = [periodTimes objectAtIndex:indexPath.row];
+    }
+    
+    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,5,300,30)];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    
+    
+    timeLabel.textColor = [UIColor colorWithRed:206 green:217 blue:228 alpha:1];
+    timeLabel.backgroundColor = [UIColor clearColor];
+    timeLabel.textAlignment = NSTextAlignmentRight;
+    timeLabel.tag = 87;
+    [cell addSubview:timeLabel];
+    timeLabel.text = periodTime;
+    cell.textLabel.text = periodName;
+    
+    
+    if ([periodName isEqualToString:@"Period 5"]) {
+        timeLabel.font = [UIFont italicSystemFontOfSize:10];
+    }
+    else {
+        timeLabel.font = [UIFont italicSystemFontOfSize:16];
+    }
+    
     
     UIImage* rowBackground = [UIImage imageNamed:@"TableViewPatternCell@2x.png"];
     UIImage* selectedBackground = [UIImage imageNamed:@"TableViewPatternCell@2x.png"];
@@ -151,9 +206,6 @@
     ((UIImageView *)cell.selectedBackgroundView).image = selectedBackground;
     
     //  [cell setBackgroundColor: [UIColor colorWithPatternImage:[UIImage imageNamed:@"categorytab1.png"]]]
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [periods objectAtIndex:indexPath.row]];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    NSLog(@"The cell height: %f", cell.frame.size.height);
     
     return cell;
 }

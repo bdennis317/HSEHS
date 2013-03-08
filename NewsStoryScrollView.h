@@ -12,9 +12,12 @@
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *body;
+@property (nonatomic, retain) NSString *imageURL;
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSDate *date;
+@property (nonatomic, retain) NSString *dateString;
 
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)_title date:(NSDate *)_date imageURL:(NSString *)_imageURL body:(NSString *)_body;
+
 @end

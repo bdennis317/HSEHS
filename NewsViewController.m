@@ -129,16 +129,11 @@
         
         NSLog(@"valueDevice: %d ...", valueDevice);
         
- 
-        if (valueDevice == 3) {
-            //is an iPhone 5
-            scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 57, 299, 400)];
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenHeight = screenRect.size.height;
 
-        } else {
-            // is before iPhone 5
-            scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 57, 299, 300)];
-            
-        }
+        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 57, 299, screenHeight - 15)];
+
 
     
         scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width *[parsedItems count], scrollView.bounds.size.height);
@@ -150,7 +145,10 @@
             NSLog(@"The first enclosed thing: %@" ,[parsedStory.enclosures objectAtIndex:0]);
             NSLog(@"The parsed story title: %@" ,parsedStory.title);
             
-            NewsStoryScrollView* storyView = [[NewsStoryScrollView alloc] initWithFrame:CGRectMake(x * scrollView.bounds.size.width, 0, scrollView.bounds.size.width, scrollView.bounds.size.height) title:parsedStory.title    date:parsedStory.date imageURL:nil body:parsedStory.content];
+            NSDictionary *enclosure = [parsedStory.enclosures objectAtIndex:0];
+            NSString *imageURL = [enclosure objectForKey:@"url"];
+            
+            NewsStoryScrollView* storyView = [[NewsStoryScrollView alloc] initWithFrame:CGRectMake(x * scrollView.bounds.size.width, 0, scrollView.bounds.size.width, scrollView.bounds.size.height) title:parsedStory.title    date:parsedStory.date imageURL:imageURL body:parsedStory.content];
             storyView.contentSize = CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height);
           
             [scrollView addSubview:storyView];

@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <CoreData/CoreData.h>
 
 @implementation AppDelegate
+@synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -106,5 +108,60 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark -
+#pragma mark Helper Methods
+
+- (NSString *)applicationDocumentsDirectory {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
+
+#pragma mark -
+#pragma mark Core Data Stack
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (!managedObjectContext) {
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+        if (coordinator) {
+            managedObjectContext = [[NSManagedObjectContext alloc] init];
+            managedObjectContext.persistentStoreCoordinator = coordinator;
+        }
+    }
+    
+    return managedObjectContext;
+}
+
+
+- (NSManagedObjectModel *)managedObjectModel {
+    if (!managedObjectModel) {
+        managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    }
+    
+    return managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (!persistentStoreCoordinator) {
+        NSURL *storeUrl = [NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"Base.sqlite"]];
+        
+        NSError *error = nil;
+        persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+        
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+        
+        if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            
+            abort();
+        } 
+    }
+    
+    return persistentStoreCoordinator;
+}
+
+
 
 @end

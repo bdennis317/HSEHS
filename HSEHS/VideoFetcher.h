@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VideoFetcher : NSObject
+@interface VideoFetcher : NSObject {
+    long long expectedLength;
+	long long currentLength;
+}
 
 
 @property (nonatomic, strong) NSMutableArray *videos;

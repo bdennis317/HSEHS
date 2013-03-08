@@ -51,10 +51,18 @@
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
     [self.responseData setLength:0];
+    expectedLength = [response expectedContentLength];
+	currentLength = 0;
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)data {
     [self.responseData appendData:data];
+    currentLength += [data length];
+	float progress = currentLength / (float)expectedLength;
+    
+    if ([delegate respondsToSelector:@selector(updateHUDProgess:)]) {
+        [delegate performSelector:@selector(updateHUDProgess:) withObject:[NSNumber numberWithFloat:progress]];
+    }
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
@@ -85,6 +93,10 @@
         
         if ([delegate respondsToSelector:@selector(announcementFetcherDidFinishDownload:withAnnouncements:)]) {
             [delegate performSelector:@selector(announcementFetcherDidFinishDownload:withAnnouncements:) withObject:self withObject:videos];
+        }
+        
+        if ([delegate respondsToSelector:@selector(HUDFinished)]) {
+            [delegate performSelector:@selector(HUDFinished)];
         }
     }
     @catch (NSException *e) {

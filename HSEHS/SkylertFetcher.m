@@ -41,8 +41,8 @@
     self.responseData = [[NSMutableData alloc] init];
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
-    if ([delegate respondsToSelector:@selector(announcementFetcherDidStartDownload:)]) {
-        [delegate performSelector:@selector(announcementFetcherDidStartDownload:) withObject:self];
+    if ([delegate respondsToSelector:@selector(skylertFetcherDidStartDownload:)]) {
+        [delegate performSelector:@selector(skylertFetcherDidStartDownload:) withObject:self];
     }
 }
 
@@ -51,10 +51,18 @@
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
     [self.responseData setLength:0];
+   	expectedLength = [response expectedContentLength];
+	currentLength = 0;
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)data {
     [self.responseData appendData:data];
+    currentLength += [data length];
+	float progress = currentLength / (float)expectedLength;
+    
+    if ([delegate respondsToSelector:@selector(updateHUDProgess:)]) {
+        [delegate performSelector:@selector(updateHUDProgess:) withObject:[NSNumber numberWithFloat:progress]];
+    }
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
@@ -63,6 +71,7 @@
     if ([delegate respondsToSelector:@selector(announcementFetcher:didFailWithError:)]) {
         [delegate performSelector:@selector(announcementFetcher:didFailWithError:) withObject:self withObject:error];
     }
+
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
@@ -85,7 +94,15 @@
         
         if ([delegate respondsToSelector:@selector(announcementFetcherDidFinishDownload:withAnnouncements:)]) {
             [delegate performSelector:@selector(announcementFetcherDidFinishDownload:withAnnouncements:) withObject:self withObject:skylerts];
+            
         }
+        
+        if ([delegate respondsToSelector:@selector(HUDFinished)]) {
+            [delegate performSelector:@selector(HUDFinished)];
+        }
+        
+
+        
     }
     @catch (NSException *e) {
         NSLog(@"Error while parsing JSON and setting announcements");

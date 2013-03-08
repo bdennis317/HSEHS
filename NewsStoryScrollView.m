@@ -10,46 +10,45 @@
 
 @implementation NewsStoryScrollView
 
-@synthesize title, date, image, body;
+@synthesize title, date, image, body, imageURL, dateString;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)_title date:(NSDate *)_date imageURL:(NSString *)_imageURL body:(NSString *)_body 
 {
     
     title = _title;
     body = _body;
-    //image = _imageURL;
+    image =  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_imageURL]]];
+    imageURL = _imageURL;
     date = _date;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    
+    dateString = [dateFormatter stringFromDate:_date];
     
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
     [self setOpaque:NO];
         
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 10, 210, 70)];
-    titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    titleLabel.numberOfLines = 3;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
-    titleLabel.text = title;
-    NSLog(@"The title is %@",title);
-        [titleLabel setOpaque:YES];
-        titleLabel.textColor = [UIColor blackColor];
+
+        
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+        
     
+    NSString *webViewHTML = [NSString stringWithFormat:@"<div style = \" font-family:font-family: \"HelveticaNeueBold\", \"HelveticaNeue-Bold\", \"Helvetica Neue Bold\", \"HelveticaNeue\", \"Helvetica Neue\", 'TeXGyreHerosBold', \"Helvetica\", \"Tahoma\", \"Geneva\", \"Arial\", sans-serif; font-weight:600; font-stretch:normal; font-size:15; \"> %@</div> <img style = \"float: right; margin: 4px; max-width:150px\" src =\"%@\"> <div style = \"font:Georgia,\"Times New Roman\",Times,serif;color:#999;\">%@</div>  <p> %@ </p>",title, imageURL, dateString, body];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(5, 10, 300, screenHeight - 87)];
+    [webView loadHTMLString:webViewHTML baseURL:[NSURL URLWithString:@""]];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 10, 80, 80)];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.image = image;
-    
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 90, 300, 500)];
-        textView.editable = NO;
-    textView.text = body;
-    
-    [self addSubview:titleLabel];
-    [self addSubview:imageView];
-    [self addSubview:textView];
+
+    [self addSubview:webView];
+        
     }
     
     return self;
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

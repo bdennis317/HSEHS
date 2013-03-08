@@ -9,6 +9,7 @@
 #import "VideoPlaylistViewController.h"
 #import "VideoFetcher.h"
 #import "Video.h"
+#import "MBProgressHUD.h"
 #import "ECSlidingViewController.h"
 #import "MenuViewController.h"
 #import "YoutubePlayerViewController.h"
@@ -49,10 +50,40 @@
         NSLog(@"%s setCategoryError=%@", __PRETTY_FUNCTION__, setCategoryError);
     }
     
-    
+    [self addHud];
     
 	// Do any additional setup after loading the view.
 }
+
+#pragma HUD Delegate Methods
+
+-(void)addHud {
+    
+   	// The hud will dispable all input on the window
+	HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    HUD.mode = MBProgressHUDModeDeterminate;
+	[self.view addSubview:HUD];
+	
+	HUD.delegate = self;
+    HUD.userInteractionEnabled = NO;
+	HUD.labelText = @"Connecting to HSE";
+    
+    [HUD show:YES];
+    
+}
+
+
+-(void)HUDFinished {
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    HUD.labelText = @"Connected";
+    HUD.mode = MBProgressHUDModeCustomView;
+    [HUD hide:YES afterDelay:.7];
+}
+
+-(void)updateHUDProgess:(NSNumber *)progress {
+    HUD.progress = [progress floatValue];
+}
+
 
 -(void) setUpMenuAndNav {
     

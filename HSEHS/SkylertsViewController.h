@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface SkylertsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface SkylertsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate> {
    
    // NSMutableArray *rowHeights;
+    MBProgressHUD *HUD;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *skylerts;
 @property (nonatomic,strong) UIButton *menuBtn;
+@property (nonatomic, strong) IBOutlet MBProgressHUD *hudView;
 @property (nonatomic,strong) IBOutlet UINavigationBar *navBar;
 
 

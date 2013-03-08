@@ -10,6 +10,8 @@
 #import "SkylertFetcher.h"
 #import "Skylert.h"
 #import "ECSlidingViewController.h"
+#import "AppDelegate.h"
+#import "MBProgressHUD.h"
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -19,7 +21,7 @@
 
 @implementation SkylertsViewController
 
-@synthesize skylerts, tableView, menuBtn, navBar;
+@synthesize skylerts, tableView, menuBtn, navBar, hudView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,9 +40,42 @@
     [fetcher downloadSkylerts];
     skylerts = fetcher.skylerts;
     [self setUpMenuAndNav];
-
+    
+    [self addHud];
+    
+    //[self performSelectorOnMainThread:@selector(addHud) withObject:nil waitUntilDone:NO];
 	// Do any additional setup after loading the view.
 }
+
+#pragma HUD Delegate Methods
+
+-(void)addHud {
+    
+   	// The hud will dispable all input on the window
+	HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    HUD.mode = MBProgressHUDModeDeterminate;
+	[self.view addSubview:HUD];
+	
+	HUD.delegate = self;
+    HUD.userInteractionEnabled = NO;
+	HUD.labelText = @"Connecting to HSE";
+    
+    [HUD show:YES];
+
+}
+
+
+-(void)HUDFinished {
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    HUD.labelText = @"Connected";
+    HUD.mode = MBProgressHUDModeCustomView;
+    [HUD hide:YES afterDelay:.7];
+}
+
+-(void)updateHUDProgess:(NSNumber *)progress {
+    HUD.progress = [progress floatValue];
+}
+
 
 -(void) setUpMenuAndNav {
     
@@ -65,6 +100,10 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
+-(void) skylertFetcherDidStartDownload:(id)sender {
+    self.hudView.labelText = @"Downloading Alerts";
+    [self.hudView show:YES];
+}
 -(void)announcementFetcherDidFinishDownload:(id)sender withAnnouncements:(NSArray *)skyArray {
 
     skylerts = [NSMutableArray arrayWithCapacity:[skyArray count]];
@@ -74,7 +113,17 @@
     }
     
     [self reloadTable];
+    
+    //[self.hudView hide:YES];
 }
+
+
+- (void)skylertFetcher:(id)sender didFailWithError:(NSError *)anError {
+    [self.hudView hide:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Whoops" message:@"We couldn't download the Alerts. Please check your internet connection and try again" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 
 - (IBAction)revealMenu:(id)sender
 {

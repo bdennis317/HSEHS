@@ -14,7 +14,9 @@
     IBOutlet UINavigationBar *navBar;
     IBOutlet UISegmentedControl *campusControl;
     IBOutlet UISegmentedControl *typeControl;
-    NSMutableArray *schedule;
+    NSMutableArray *periodNames;
+    NSMutableArray *periodTimes;
+    NSDictionary *mainDictionary;
 }
 
 

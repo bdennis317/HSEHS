@@ -7,14 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MBProgressHUD.h"
 
 @interface SkylertFetcher : NSObject {
-    
+    MBProgressHUD *HUD;
+    long long expectedLength;
+	long long currentLength;
 }
 
 @property (nonatomic, strong) NSMutableArray *skylerts;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) UIViewController* delegate;
 
 - (void)downloadSkylerts;
 
