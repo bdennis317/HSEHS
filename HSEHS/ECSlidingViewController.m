@@ -68,7 +68,10 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 @end
 
-@implementation ECSlidingViewController
+@implementation ECSlidingViewController {
+    UIPanGestureRecognizer* topViewSnapshotGestureRecognizer;
+}
+
 
 // public properties
 @synthesize underLeftViewController  = _underLeftViewController;
@@ -461,12 +464,10 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     if (!self.topViewSnapshot.superview && !self.shouldAllowUserInteractionsWhenAnchored) {
         topViewSnapshot.layer.contents = (id)[UIImage imageWithUIView:self.topView].CGImage;
         
-        if (self.shouldAddPanGestureRecognizerToTopViewSnapshot && (_resetStrategy & ECPanning)) {
-            if (!_topViewSnapshotPanGesture) {
-                _topViewSnapshotPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
-            }
-            [topViewSnapshot addGestureRecognizer:_topViewSnapshotPanGesture];
-        }
+        if(!topViewSnapshotGestureRecognizer)
+            topViewSnapshotGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
+        [topViewSnapshot addGestureRecognizer:topViewSnapshotGestureRecognizer];
+        topViewSnapshotGestureRecognizer.enabled = _resetStrategy & ECPanning;
         [self.topView addSubview:self.topViewSnapshot];
     }
 }

@@ -1,30 +1,24 @@
 //
-//  Alertself.m
+//  VideoTableViewCell.m
 //  HSEHS
 //
 //  Created by Ben Dennis on 3/10/13.
 //  Copyright (c) 2013 Dennis Tech. All rights reserved.
 //
 
-#import "AlertCell.h"
-#import "Skylert.h"
+#import "VideoTableViewCell.h"
+#import "Video.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation AlertCell
 
 
+@implementation VideoTableViewCell
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView standardHeight:(int)standardHeight Video:(Video *)video
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView standardHeight:(int)standardHeight alert:(Skylert *)skylert {
-    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        // Initialization code
         self.backgroundView =
         [[UIImageView alloc] init];
 		self.selectedBackgroundView =
@@ -33,39 +27,66 @@
         
         
         
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, 7, 302, 30)];
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(98, 7, 220, 30)];
         title.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
         title.adjustsFontSizeToFitWidth = YES;
         title.textColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.25 alpha:1.0];
         title.backgroundColor = [UIColor clearColor];
-        title.text = skylert.name;
+        title.text = video.title;
         title.userInteractionEnabled = NO;
         
-        UILabel *date = [[UILabel alloc] initWithFrame:CGRectMake(15, 26, 310,20)];
+        UILabel *date = [[UILabel alloc] initWithFrame:CGRectMake(98, 26, 220,20)];
         date.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
         date.adjustsFontSizeToFitWidth = YES;
         date.textColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.35 alpha:1.0];
         date.backgroundColor = [UIColor clearColor];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        date.text = [dateFormatter stringFromDate:skylert.date];
+        [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+        date.text = [dateFormatter stringFromDate:video.date];
         date.userInteractionEnabled = NO;
         
         
-        
-        CGSize size =   [self sizeOfText:skylert.message widthOfTextView:310 withFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
-        UITextView *message = [[UITextView alloc] initWithFrame:CGRectMake(7,38,size.width,size.height)];
+        UITextView *message = [[UITextView alloc] initWithFrame:CGRectMake(95,38,220,100)];
         message.font = [UIFont fontWithName:@"HelveticaNeue" size:13];
         message.userInteractionEnabled = NO;
         
         message.textColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.4 alpha:1.0];
         message.backgroundColor = [UIColor clearColor];
-        message.text = [skylert message];
-        [message sizeToFit];
+        message.text = [video description];
+        UIButton *playButton;
+        UIWebView *webView;
         
-        CGRect frame = message.frame;
-        frame.size.height = message.contentSize.height;
-        message.frame = frame;
+        if (video.link) {
+            
+            /*
+             playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+             playButton.frame =  CGRectMake(12, 10, 50, 50);
+             [playButton setImage:[UIImage imageNamed:@"PlayButton@2x.png"]  forState:UIControlStateNormal];
+             playButton.tag = indexPath.row;
+             [playButton addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+             */
+            
+            NSArray *videoURLSplit = [video.link componentsSeparatedByString:@"v="];
+            NSString *videoID = [[videoURLSplit objectAtIndex:1] substringToIndex:11];
+            NSString* newURL = [NSString stringWithFormat:@"http://www.youtube.com/v/%@", videoID];
+            
+            
+            NSString* embedHTML = @"\
+            <html><head>\
+            <style type=\"text/css\">\
+            body {\
+            background-color: transparent;\
+            color: white;\
+            }\
+            </style>\
+            </head><body style=\"margin:0\">\
+            <embed id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \
+            width=\"80\" height=\"80\"></embed>\
+            </body></html>";
+            NSString* html = [NSString stringWithFormat:embedHTML, newURL, 50, 50];
+            webView = [[UIWebView alloc] initWithFrame:CGRectMake(12, 11, 80, 80)];
+            [webView loadHTMLString:html baseURL:nil];
+        }
         
         
         
@@ -87,12 +108,13 @@
             [background.layer setCornerRadius:7.0f];
             [background.layer setMasksToBounds:YES];
             [background.layer setBorderWidth:0.0f];
+            seperator.hidden = YES;
         }
         else if (row == 0)
         {
             //top row
             
-            background.frame = CGRectMake(9, 9, 302, standardHeight- 9);
+            background.frame = CGRectMake(9, 9, 302, standardHeight - 9);
             
             CAShapeLayer *layer = [CAShapeLayer layer];
             UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:background.bounds byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight) cornerRadii:CGSizeMake(7.0, 7.0)];
@@ -125,8 +147,8 @@
             message.frame = CGRectMake(message.frame.origin.x,message.frame.origin.y - 6, message.frame.size.width, message.frame.size.height);
             title.frame = CGRectMake(title.frame.origin.x,title.frame.origin.y - 6, title.frame.size.width, title.frame.size.height);
             date.frame = CGRectMake(date.frame.origin.x,date.frame.origin.y - 6, date.frame.size.width, date.frame.size.height);
-            
         }
+        
         ((UIImageView *)self.backgroundView).image = rowBackground;
         ((UIImageView *)self.selectedBackgroundView).image = selectionBackground;
         [self addSubview:background];
@@ -134,7 +156,7 @@
         [self addSubview:message];
         [self addSubview:date];
         [self addSubview:title];
-    }
+        [self addSubview:webView];
     
     // UIImage* rowBackground = [UIImage imageNamed:@"TableViewPatternself@2x.png"];
     // UIImage* selectedBackground = [UIImage imageNamed:@"TableViewPatternself@2x.png"];
@@ -145,16 +167,17 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSLog(@"The name is: %@",skylert.name);
+    NSLog(@"The title is: %@",video.title);
     
+    }
     return self;
 }
 
 
--(CGSize)sizeOfText:(NSString *)textToMesure widthOfTextView:(CGFloat)width withFont:(UIFont*)font
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    CGSize ts = [textToMesure sizeWithFont:font constrainedToSize:CGSizeMake(width-20.0, FLT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-    return ts;
+    [super setSelected:selected animated:animated];
+    // Configure the view for the selected state
 }
 
 @end

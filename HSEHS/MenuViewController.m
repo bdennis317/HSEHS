@@ -38,7 +38,30 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    menu = [NSArray arrayWithObjects:@"Important Alerts", @"Bell Schedule", @"Handbook", @"Text-A-Tip", @"HSE TV",@"The Orb", nil];
+    menu = [NSArray arrayWithObjects:
+            @"Home",
+            @"Important Alerts",
+            @"Announcements",
+            @"Bell Schedule",
+            @"HSE TV",
+            @"The Orb",
+            @"Email Teacher",
+            @"Call School",
+            @"Text-A-Tip",
+            @"Handbook", nil];
+    
+    menuIcons = [NSArray arrayWithObjects:
+                 [UIImage imageNamed:@"homeIcon@2x.png"],
+                 [UIImage imageNamed:@"alertsIcon@2x.png"],
+                 [UIImage imageNamed:@"announcementsIcon@2x.png"],
+                 [UIImage imageNamed:@"bellIcon@2x.png"],
+                 [UIImage imageNamed:@"tvIcon@2x.png"],
+                 [UIImage imageNamed:@"newsIcon@2x.png"],
+                 [UIImage imageNamed:@"mailIcon@2x.png"],
+                 [UIImage imageNamed:@"phoneIcon@2x.png"],
+                 [UIImage imageNamed:@"textTipIcon@2x.png"],
+                 [UIImage imageNamed:@"judgeIcon@2x.png"], nil];
+    
     
     [self.slidingViewController setAnchorRightRevealAmount:200.0f];
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
@@ -84,15 +107,21 @@
 		cell.selectedBackgroundView =
          [[UIImageView alloc] init];
         cell.textLabel.textColor = [UIColor colorWithRed:206 green:217 blue:228 alpha:1];
+        cell.textLabel.frame = CGRectMake(70, cell.textLabel.frame.origin.y, cell.textLabel.frame.size.width, cell.textLabel.frame.size.height);
+        UIImageView *iconImageView = [[UIImageView alloc] initWithImage:[menuIcons objectAtIndex:indexPath.row]];
+        iconImageView.frame = CGRectMake(8, 11.5, 19, 19);
+        [cell addSubview:iconImageView];
     }
     
-    UIImage* rowBackground = [UIImage imageNamed:@"TableViewPatternCell@2x.png"];
-    UIImage* selectedBackground = [UIImage imageNamed:@"TableViewPatternCell@2x.png"];
-    ((UIImageView *)cell.backgroundView).image = rowBackground;
-    ((UIImageView *)cell.selectedBackgroundView).image = selectedBackground;
+   // UIImage* rowBackground = [UIImage imageNamed:@"TableViewPatternCell@2x.png"];
+    //UIImage* selectedBackground = [UIImage imageNamed:@"TableViewPatternCell@2x.png"];
+    //((UIImageView *)cell.backgroundView).image = rowBackground;
+    //((UIImageView *)cell.selectedBackgroundView).image = selectedBackground;
+    
+   // cell.contentView.backgroundColor = [UIColor colorWithRed:50 green:57 blue:73 alpha:1];
     
     //  [cell setBackgroundColor: [UIColor colorWithPatternImage:[UIImage imageNamed:@"categorytab1.png"]]]
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [menu objectAtIndex:indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"     %@", [menu objectAtIndex:indexPath.row]];
     
     NSLog(@"The cell height: %f", cell.frame.size.height);
     
@@ -151,6 +180,8 @@
      */
     
     NSString *identifier = [NSString stringWithFormat:@"%@", [menu objectAtIndex:indexPath.row]];
+    //remove the leading spaces
+    identifier = [identifier stringByReplacingOccurrencesOfString:@"     " withString:@""];
     
     UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
     

@@ -45,6 +45,52 @@
             </objects>
             <point key="canvasLocation" x="-474" y="630"/>
         </scene>
+        <!--Video Playlist View Controller - HSE TV-->
+        <scene sceneID="a1M-gP-zgu">
+            <objects>
+                <tableViewController restorationIdentifier="" storyboardIdentifier="" id="E1e-eq-eKl" customClass="VideoPlaylistViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gMB-9z-l9l">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ixM-SG-HCB">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="E1e-eq-eKl" id="avP-s8-SHV"/>
+                            <outlet property="delegate" destination="E1e-eq-eKl" id="vey-ER-0M5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="HSE TV" id="mZb-JE-Lzd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VaY-x2-YEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-22" y="1676"/>
+        </scene>
+        <!--My Sliding Navigation Controller-->
+        <scene sceneID="YZa-yC-QqU">
+            <objects>
+                <navigationController storyboardIdentifier="HSE TV" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="e1v-3c-WXD" customClass="MySlidingNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dlt-Rr-sRD">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="E1e-eq-eKl" kind="relationship" relationship="rootViewController" id="v9l-Au-uD8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gyW-iD-9Lh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-550" y="1676"/>
+        </scene>
         <!--Youtube Player View Controller-->
         <scene sceneID="ukq-aH-bgp">
             <objects>
@@ -117,19 +163,76 @@
                                     <navigationItem title="The Orb" id="m5k-4b-Zq9"/>
                                 </items>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="orbBottomBar@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Pp-3k-br4">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="jn5-nc-TMH"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oI6-nv-Mka">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-Rm-nds">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="wfH-aY-M0U"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="simpleArrow@2x.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rightButtonTapped:" destination="Kba-XB-FtO" eventType="touchUpInside" id="fqt-dU-2nS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUj-p1-vYy">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="W9l-iY-0t4"/>
+                                    <constraint firstAttribute="height" constant="24" id="hea-Zw-6cL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="simpleLeftArrow@2x.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="leftButtonTapped:" destination="Kba-XB-FtO" eventType="touchUpInside" id="lxJ-FS-CnD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6Pp-3k-br4" firstAttribute="trailing" secondItem="uJV-0Y-fBd" secondAttribute="trailing" type="default" id="1sy-d1-vC1"/>
+                            <constraint firstItem="6Pp-3k-br4" firstAttribute="bottom" secondItem="uJV-0Y-fBd" secondAttribute="bottom" type="user" id="27M-MF-tJb"/>
                             <constraint firstItem="fiL-a9-JPc" firstAttribute="leading" secondItem="uJV-0Y-fBd" secondAttribute="leading" type="default" id="7ex-Zu-cJq"/>
                             <constraint firstItem="fiL-a9-JPc" firstAttribute="top" secondItem="uJV-0Y-fBd" secondAttribute="top" type="default" id="7oe-ji-kjC"/>
                             <constraint firstItem="xKv-z5-qan" firstAttribute="top" secondItem="fiL-a9-JPc" secondAttribute="bottom" type="default" id="AjP-Le-nHI"/>
+                            <constraint firstItem="QUj-p1-vYy" firstAttribute="bottom" secondItem="ZI6-Rm-nds" secondAttribute="bottom" type="default" id="FWb-g0-hMy"/>
+                            <constraint firstItem="QUj-p1-vYy" firstAttribute="top" secondItem="ZI6-Rm-nds" secondAttribute="top" type="default" id="Hde-q7-2gd"/>
+                            <constraint firstItem="ZI6-Rm-nds" firstAttribute="centerY" secondItem="oI6-nv-Mka" secondAttribute="centerY" type="default" id="J6f-38-JUO"/>
+                            <constraint firstAttribute="trailing" secondItem="ZI6-Rm-nds" secondAttribute="trailing" constant="2" id="JTb-mQ-t8g"/>
                             <constraint firstItem="fiL-a9-JPc" firstAttribute="trailing" secondItem="uJV-0Y-fBd" secondAttribute="trailing" type="default" id="MgG-Js-gAR"/>
+                            <constraint firstItem="QUj-p1-vYy" firstAttribute="leading" secondItem="uJV-0Y-fBd" secondAttribute="leading" type="default" id="Pwe-VJ-diN"/>
                             <constraint firstItem="xKv-z5-qan" firstAttribute="trailing" secondItem="uJV-0Y-fBd" secondAttribute="trailing" type="default" id="ZzF-1m-c5e"/>
+                            <constraint firstAttribute="bottom" secondItem="QUj-p1-vYy" secondAttribute="bottom" constant="2" id="geg-ll-tcE"/>
                             <constraint firstItem="xKv-z5-qan" firstAttribute="bottom" secondItem="uJV-0Y-fBd" secondAttribute="bottom" type="default" id="h9O-gr-KGp"/>
+                            <constraint firstAttribute="centerX" secondItem="oI6-nv-Mka" secondAttribute="centerX" type="user" id="ixQ-Te-8N1"/>
+                            <constraint firstAttribute="centerX" secondItem="oI6-nv-Mka" secondAttribute="centerX" type="user" id="rN6-kf-Kmj"/>
+                            <constraint firstItem="6Pp-3k-br4" firstAttribute="leading" secondItem="uJV-0Y-fBd" secondAttribute="leading" type="default" id="rmt-TA-KDR"/>
                             <constraint firstItem="xKv-z5-qan" firstAttribute="leading" secondItem="uJV-0Y-fBd" secondAttribute="leading" type="default" id="tyh-To-b9L"/>
+                            <constraint firstItem="6Pp-3k-br4" firstAttribute="bottom" secondItem="uJV-0Y-fBd" secondAttribute="bottom" type="user" id="xe7-iw-9nh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="articleNumberLabel" destination="oI6-nv-Mka" id="ZrE-Gs-hl9"/>
+                        <outlet property="backgroundImageView" destination="xKv-z5-qan" id="pEj-rW-Adl"/>
                         <outlet property="navBar" destination="fiL-a9-JPc" id="FgY-hz-Eqh"/>
                         <outlet property="view" destination="uJV-0Y-fBd" id="YXg-p8-BEQ"/>
                     </connections>
@@ -270,6 +373,92 @@
             </objects>
             <point key="canvasLocation" x="486" y="25"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="wPz-g6-wBG">
+            <objects>
+                <viewController storyboardIdentifier="webViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Nhy-JN-Wt2" customClass="WebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xgs-ro-kkF">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0r-qW-5FU">
+                                <items>
+                                    <navigationItem title="Title" id="zIn-hn-RxR"/>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWw-no-8BZ">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Nhy-JN-Wt2" id="Exl-p4-gjc"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="bottom" secondItem="xgs-ro-kkF" secondAttribute="bottom" type="user" id="AeJ-dp-HAC"/>
+                            <constraint firstItem="I0r-qW-5FU" firstAttribute="leading" secondItem="xgs-ro-kkF" secondAttribute="leading" type="default" id="BaH-Xs-E7I"/>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="bottom" secondItem="xgs-ro-kkF" secondAttribute="bottom" type="user" id="EoV-Md-TwU"/>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="leading" secondItem="xgs-ro-kkF" secondAttribute="leading" type="user" id="f8L-nR-d2K"/>
+                            <constraint firstItem="I0r-qW-5FU" firstAttribute="top" secondItem="xgs-ro-kkF" secondAttribute="top" type="user" id="fEB-j3-P5k"/>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="top" secondItem="xgs-ro-kkF" secondAttribute="top" constant="44" type="user" id="fOd-FB-PaH"/>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="top" secondItem="I0r-qW-5FU" secondAttribute="bottom" type="user" id="j1U-MO-d81"/>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="trailing" secondItem="xgs-ro-kkF" secondAttribute="trailing" type="default" id="rdB-po-0nP"/>
+                            <constraint firstItem="tWw-no-8BZ" firstAttribute="leading" secondItem="xgs-ro-kkF" secondAttribute="leading" type="user" id="tP7-FE-mPC"/>
+                            <constraint firstItem="I0r-qW-5FU" firstAttribute="trailing" secondItem="xgs-ro-kkF" secondAttribute="trailing" type="default" id="yaF-tK-161"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navBar" destination="I0r-qW-5FU" id="xxK-Vs-V2i"/>
+                        <outlet property="view" destination="xgs-ro-kkF" id="Zvn-Zo-m1h"/>
+                        <outlet property="webView" destination="tWw-no-8BZ" id="g15-Kc-KQ2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cur-we-xbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-556" y="-988"/>
+        </scene>
+        <!--Master Alerts View Controller-->
+        <scene sceneID="7LQ-iX-ysj">
+            <objects>
+                <viewController storyboardIdentifier="Announcements" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j6A-TL-QUS" customClass="MasterAlertsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8X5-g9-nN3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="H0V-Wk-pWR">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="j6A-TL-QUS" id="3AY-Ng-CcU"/>
+                                    <outlet property="delegate" destination="j6A-TL-QUS" id="VAm-eP-ayX"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ep2-3L-LMF">
+                                <items>
+                                    <navigationItem title="Announcement Hub" id="8Vo-Fi-8l7"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ep2-3L-LMF" firstAttribute="leading" secondItem="8X5-g9-nN3" secondAttribute="leading" type="default" id="Uca-o8-BQv"/>
+                            <constraint firstItem="H0V-Wk-pWR" firstAttribute="leading" secondItem="8X5-g9-nN3" secondAttribute="leading" type="default" id="V6d-b5-1tF"/>
+                            <constraint firstItem="H0V-Wk-pWR" firstAttribute="top" secondItem="Ep2-3L-LMF" secondAttribute="bottom" type="default" id="VqD-32-BKI"/>
+                            <constraint firstItem="Ep2-3L-LMF" firstAttribute="top" secondItem="8X5-g9-nN3" secondAttribute="top" type="default" id="gzC-Y5-lDF"/>
+                            <constraint firstItem="Ep2-3L-LMF" firstAttribute="trailing" secondItem="8X5-g9-nN3" secondAttribute="trailing" type="default" id="jUT-wh-gXB"/>
+                            <constraint firstItem="H0V-Wk-pWR" firstAttribute="bottom" secondItem="8X5-g9-nN3" secondAttribute="bottom" type="default" id="mEL-MY-VQV"/>
+                            <constraint firstItem="H0V-Wk-pWR" firstAttribute="trailing" secondItem="8X5-g9-nN3" secondAttribute="trailing" type="default" id="voc-31-5Mn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navBar" destination="Ep2-3L-LMF" id="0Ld-tr-iMz"/>
+                        <outlet property="tableView" destination="H0V-Wk-pWR" id="npL-dD-ZH8"/>
+                        <outlet property="view" destination="8X5-g9-nN3" id="n9M-TN-Su1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uiD-Hw-hM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-189" y="-1003"/>
+        </scene>
         <!--Bell Schedules View Controller-->
         <scene sceneID="j8C-Q2-2ZO">
             <objects>
@@ -315,9 +504,6 @@
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tJh-vg-Ahh">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="305" type="user" id="F23-7N-EyJ"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="BqB-3B-SeG" id="y6m-5g-cv0"/>
                                     <outlet property="delegate" destination="BqB-3B-SeG" id="rsT-B3-vx5"/>
@@ -409,48 +595,6 @@
             </objects>
             <point key="canvasLocation" x="1294" y="46"/>
         </scene>
-        <!--Video Playlist View Controller-->
-        <scene sceneID="ydX-WQ-dxr">
-            <objects>
-                <viewController storyboardIdentifier="HSE TV" useStoryboardIdentifierAsRestorationIdentifier="YES" id="h8L-FG-aCx" customClass="VideoPlaylistViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nOl-lr-4K7">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="E0J-DY-Zq0">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="h8L-FG-aCx" id="JB0-pU-Kdg"/>
-                                    <outlet property="delegate" destination="h8L-FG-aCx" id="6Jm-CL-06f"/>
-                                </connections>
-                            </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Arg-8g-t2V">
-                                <items>
-                                    <navigationItem title="HSE TV" id="UcL-hy-9by"/>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="E0J-DY-Zq0" firstAttribute="bottom" secondItem="nOl-lr-4K7" secondAttribute="bottom" type="default" id="2UR-Eb-yg8"/>
-                            <constraint firstItem="Arg-8g-t2V" firstAttribute="leading" secondItem="nOl-lr-4K7" secondAttribute="leading" type="default" id="6nJ-ca-G2d"/>
-                            <constraint firstItem="E0J-DY-Zq0" firstAttribute="trailing" secondItem="nOl-lr-4K7" secondAttribute="trailing" type="default" id="Fc8-6r-YVk"/>
-                            <constraint firstItem="E0J-DY-Zq0" firstAttribute="top" secondItem="Arg-8g-t2V" secondAttribute="bottom" type="default" id="UKc-ak-wd2"/>
-                            <constraint firstItem="Arg-8g-t2V" firstAttribute="top" secondItem="nOl-lr-4K7" secondAttribute="top" type="default" id="sGJ-13-Gd9"/>
-                            <constraint firstItem="Arg-8g-t2V" firstAttribute="trailing" secondItem="nOl-lr-4K7" secondAttribute="trailing" type="default" id="u5S-p4-Oho"/>
-                            <constraint firstItem="E0J-DY-Zq0" firstAttribute="leading" secondItem="nOl-lr-4K7" secondAttribute="leading" type="default" id="vgc-sI-4UO"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="navBar" destination="Arg-8g-t2V" id="DjX-4x-002"/>
-                        <outlet property="tableView" destination="E0J-DY-Zq0" id="JgF-UB-jf0"/>
-                        <outlet property="view" destination="nOl-lr-4K7" id="PUq-kl-R46"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xc3-Xc-vaR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-45" y="756"/>
-        </scene>
         <!--Handbook View Controller-->
         <scene sceneID="klC-Py-O5i">
             <objects>
@@ -491,17 +635,33 @@
             </objects>
             <point key="canvasLocation" x="741" y="740"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="CLy-5H-3Da">
+            <objects>
+                <viewController id="2ed-PJ-Ncs" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2YR-6U-ogP">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pgL-Hw-pci" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="LargeRoyalsLogo@2x.png" width="776" height="456"/>
         <image name="Papers@2x.png" width="640" height="1058"/>
         <image name="btn-large-3@2x.png" width="600" height="92"/>
+        <image name="orbBottomBar@2x.png" width="640" height="70"/>
+        <image name="simpleArrow@2x.png" width="96" height="96"/>
+        <image name="simpleLeftArrow@2x.png" width="96" height="96"/>
     </resources>
     <classes>
         <class className="BellSchedulesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BellSchedulesViewController.h"/>
             <relationships>
-                <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="outlet" name="campusControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
@@ -539,11 +699,21 @@
                 <relationship kind="action" name="youtubeTest:"/>
             </relationships>
         </class>
+        <class className="MasterAlertsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MasterAlertsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="MenuViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
+        </class>
+        <class className="MySlidingNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MySlidingNavigationController.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
@@ -551,7 +721,10 @@
         <class className="NewsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="revealMenu:"/>
+                <relationship kind="action" name="leftButtonTapped:"/>
+                <relationship kind="action" name="rightButtonTapped:"/>
+                <relationship kind="outlet" name="articleNumberLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="menuBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
             </relationships>
@@ -567,17 +740,24 @@
         <class className="TextATipViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TextATipViewController.h"/>
             <relationships>
-                <relationship kind="action" name="revealMenu:"/>
                 <relationship kind="action" name="textTapped:"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="textButton" candidateClass="UIButton"/>
             </relationships>
         </class>
-        <class className="VideoPlaylistViewController" superclassName="UIViewController">
+        <class className="VideoPlaylistViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/VideoPlaylistViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="gestureRecognizer" candidateClass="UIGestureRecognizer"/>
+                <relationship kind="outlet" name="menuBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="WebViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
         <class className="YoutubePlayerViewController" superclassName="UIViewController">

@@ -7,20 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "MBProgressHUD.h"
 
-@interface VideoPlaylistViewController : UIViewController <UITableViewDataSource,UITableViewDelegate> {
+@interface VideoPlaylistViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
     
-    IBOutlet UITableView *tableView;
+   // IBOutlet UITableView *tableView;
     MBProgressHUD *HUD;
 }
 
 
 @property (strong, nonatomic) NSMutableArray *videos;
-@property (nonatomic,strong) UIButton *menuBtn;
+@property (nonatomic,strong) IBOutlet UIButton *menuBtn;
 @property (nonatomic,strong) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer *gestureRecognizer;
 
 
+- (void)bringSubviewToFront:(UIView *)view;
 -(void)announcementFetcherDidFinishDownload:(id)sender withAnnouncements:(NSArray *)vidArray;
 
 

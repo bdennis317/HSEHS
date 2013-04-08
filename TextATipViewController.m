@@ -90,7 +90,7 @@
     
     if([MFMessageComposeViewController canSendText]) {
         
-        controller.body = @"@HSEHS";
+        controller.body = @"@HSEHS :";
         controller.recipients = [NSArray arrayWithObject:@"847847"];
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:nil];

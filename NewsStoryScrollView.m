@@ -36,8 +36,26 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenHeight = screenRect.size.height;
         
-    
-    NSString *webViewHTML = [NSString stringWithFormat:@"<div style = \" font-family:font-family: \"HelveticaNeueBold\", \"HelveticaNeue-Bold\", \"Helvetica Neue Bold\", \"HelveticaNeue\", \"Helvetica Neue\", 'TeXGyreHerosBold', \"Helvetica\", \"Tahoma\", \"Geneva\", \"Arial\", sans-serif; font-weight:600; font-stretch:normal; font-size:15; \"> %@</div> <img style = \"float: right; margin: 4px; max-width:150px\" src =\"%@\"> <div style = \"font:Georgia,\"Times New Roman\",Times,serif;color:#999;\">%@</div>  <p> %@ </p>",title, imageURL, dateString, body];
+        
+        
+      
+        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"NewsStoryHtml" ofType:@"html"];
+        
+        NSString *webViewHTML = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+        
+        
+        //if there is no image, then delete the image placeholder, if there is an image, then add it to the html
+        if ([imageURL isEqualToString:@""] || !imageURL) {
+            webViewHTML = [webViewHTML stringByReplacingOccurrencesOfString:@"imagehere" withString:@""];
+        } else {
+            NSString * imageHTMLString = [NSString stringWithFormat:@"<img src =\"%@\">",imageURL];
+            webViewHTML = [webViewHTML stringByReplacingOccurrencesOfString:@"imagehere" withString:imageHTMLString];
+        }
+        
+        webViewHTML =  [webViewHTML stringByReplacingOccurrencesOfString:@"titlehere" withString:title];
+        webViewHTML =  [webViewHTML stringByReplacingOccurrencesOfString:@"datehere" withString:dateString];
+        webViewHTML =  [webViewHTML stringByReplacingOccurrencesOfString:@"bodyhere" withString:body];
+
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(5, 10, 300, screenHeight - 87)];
     [webView loadHTMLString:webViewHTML baseURL:[NSURL URLWithString:@""]];
     

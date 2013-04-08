@@ -10,6 +10,7 @@
 
 @interface MenuViewController : UITableViewController {
     UITableView *tableView;
+    NSArray *menuIcons;
 }
 
 

@@ -19,7 +19,7 @@
 
 @implementation NewsViewController
 
-@synthesize navBar, menuBtn, feedParser, parsedItems, scrollView;
+@synthesize navBar, menuBtn, feedParser, parsedItems, scrollView, backgroundImageView,articleNumberLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,6 +54,10 @@
 - (IBAction)revealMenu:(id)sender
 {
     [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [feedParser stopParsing];
 }
 
 - (void)viewDidLoad
@@ -132,9 +136,10 @@
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenHeight = screenRect.size.height;
 
-        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 57, 299, screenHeight - 15)];
-
-
+        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14, 4, 299, backgroundImageView.frame.size.height - 4)]; // 15 is status bar , 30 is height of article number control, 44 is nav bar
+        scrollView.delegate = self;
+        //used to distinguis between main scroll view and it's subviews 
+        scrollView.tag = 99;
     
         scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width *[parsedItems count], scrollView.bounds.size.height);
         scrollView.pagingEnabled = YES;
@@ -150,11 +155,60 @@
             
             NewsStoryScrollView* storyView = [[NewsStoryScrollView alloc] initWithFrame:CGRectMake(x * scrollView.bounds.size.width, 0, scrollView.bounds.size.width, scrollView.bounds.size.height) title:parsedStory.title    date:parsedStory.date imageURL:imageURL body:parsedStory.content];
             storyView.contentSize = CGSizeMake(scrollView.bounds.size.width, scrollView.bounds.size.height);
+            storyView.showsHorizontalScrollIndicator = NO;
           
             [scrollView addSubview:storyView];
         }
         
-        [self.view addSubview:scrollView];
+        backgroundImageView.userInteractionEnabled = YES;
+        [backgroundImageView addSubview:scrollView];
+        [self scrollViewDidEndDecelerating:scrollView];
+    }
+}
+
+
+- (IBAction)rightButtonTapped:(id)sender {
+    
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;    
+    int numPages = floor (scrollView.contentSize.width / pageWidth);
+    
+    
+    if (page + 1 != numPages) {
+        [scrollView scrollRectToVisible:CGRectMake((pageWidth * (page + 1)), 0, scrollView.frame.size.width, scrollView.frame.size.height) animated:YES];
+        articleNumberLabel.text = [NSString stringWithFormat:@"Article %d of %d", page + 2, numPages];
+    } else {
+        [scrollView scrollRectToVisible:CGRectMake(0, 0, scrollView.frame.size.width, scrollView.frame.size.height) animated:YES];
+        articleNumberLabel.text = [NSString stringWithFormat:@"Artcile %d of %d", 1, numPages];
+    }
+}
+
+- (IBAction)leftButtonTapped:(id)sender {
+    
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    int numPages = floor (scrollView.contentSize.width / pageWidth);
+    
+    
+    if (page != 0 ) {
+        [scrollView scrollRectToVisible:CGRectMake((pageWidth * (page + - 1)), 0, scrollView.frame.size.width, scrollView.frame.size.height) animated:YES];
+        articleNumberLabel.text = [NSString stringWithFormat:@"Artcile %d of %d", page, numPages];
+    } else {
+        [scrollView scrollRectToVisible:CGRectMake((pageWidth * (numPages - 1)), 0, scrollView.frame.size.width, scrollView.frame.size.height) animated:YES];
+        articleNumberLabel.text = [NSString stringWithFormat:@"Artcile %d of %d", numPages, numPages];
+    }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView {
+    if (_scrollView.tag == 99) {
+        
+        CGFloat pageWidth = _scrollView.frame.size.width;
+        int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 2;
+        
+        int numPages = floor (_scrollView.contentSize.width / pageWidth);
+        
+        articleNumberLabel.text = [NSString stringWithFormat:@"Artcile %d of %d", page, numPages];
+        
     }
 }
 
